@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { filterContacts } from '../../redux/contacts/contacts-actions';
 
@@ -9,11 +9,15 @@ const Filter = () => {
   const handleSearchChange = e => {
     setSearchChange(e.target.value);
   };
-  dispatch(filterContacts(searchChange));
+
+  useEffect(() => {
+    dispatch(filterContacts(searchChange));
+  }, [searchChange]);
+
   return (
     <>
       <p>Find contacts by name </p>
-      <input type="text" onChange={handleSearchChange}  />
+      <input type="text" onChange={handleSearchChange} />
     </>
   );
 };

@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { connect } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contacts/contacts-actions';
+import {
+  addContact,
+  fetchContact,
+} from '../../redux/contacts/contacts-operations';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles({
@@ -20,6 +23,10 @@ const ContactForm = () => {
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+  dispatch(fetchContact());
+},[])
 
   const handleNameChange = e => setName(e.target.value);
   const handleNumberChange = e => setNumber(e.target.value);
