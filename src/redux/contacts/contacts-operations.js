@@ -10,19 +10,26 @@ export const fetchContact = () => async dispatch => {
     const { data } = await axios.get('/contacts');
     dispatch(actions.fetchContactSuccess(data));
   } catch (error) {
-    dispatch(actions.fetchContactSuccess(error));
+    dispatch(actions.fetchContactError(error));
   }
 
   // axios
   //   .get('/contacts')
   //   .then(({ data }) => dispatch(actions.fetchContactSuccess(data)))
-  //   .catch(error => dispatch(actions.fetchContactSuccess(error)));
+  //   .catch(error => dispatch(actions.fetchContactError(error)));
 };
 
-export const addContact = contact => dispatch => {
-  // const { name, number } = contact;
-  // console.log(name, number);
+// export const addContact = () => async dispatch => {
+//   dispatch(actions.addContactRequest());
+//   try {
+//     const { data } = await axios.post('/contacts');
+//     dispatch(actions.addContactSuccess(data));
+//   } catch (error) {
+//     dispatch(actions.addContactError(error));
+//   }
+// };
 
+export const addContact = contact => dispatch => {
   dispatch(actions.addContactRequest());
 
   axios

@@ -21,29 +21,8 @@ const initialState = [
   // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-// const items = (state = initialState, action) => {
-//   switch (action.type) {
-//     case types.ADD:
-//       if (state.find(({ name }) => name === action.payload.name)) {
-//         alert(`${action.payload.name} is already in contacts`);
-//         return state;
-//       }
-
-// const items = createReducer(initialState, {
-//   [addContact]: (state, action) => {
-//     if (state.find(({ name }) => name === action.payload.name)) {
-//       alert(`${action.payload.name} is already in contacts`);
-//     } else {
-//       // console.log('contact+');
-//       // [...state, action.payload]
-//     }
-//   },
-//   [deleteContact]: (state, action) =>
-//     state.filter(contact => contact.id !== action.payload),
-// });
-
 const items = createReducer(initialState, {
-[fetchContactSuccess]:(_, {payload}) => payload,
+  [fetchContactSuccess]: (_, { payload }) => payload,
 
   [addContactSuccess]: (state, action) => [...state, action.payload],
   [deleteContactSuccess]: (state, action) =>
@@ -62,11 +41,9 @@ const loading = createReducer(false, {
   [deleteContactError]: () => false,
 });
 
-
 const filter = createReducer('', {
   [filterContacts]: (_, action) => action.payload,
 });
-
 
 export default combineReducers({
   items,

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 // import { connect } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addContact,
   fetchContact,
 } from '../../redux/contacts/contacts-operations';
 import { createUseStyles } from 'react-jss';
-
+import { getContacts } from '../../redux/contacts/contacts-selectors';
 const useStyles = createUseStyles({
   form: {
     padding: '5px',
@@ -25,8 +25,10 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-  dispatch(fetchContact());
-},[])
+    dispatch(fetchContact());
+  }, []);
+
+  const contacts = useSelector(getContacts);
 
   const handleNameChange = e => setName(e.target.value);
   const handleNumberChange = e => setNumber(e.target.value);
@@ -34,6 +36,11 @@ const ContactForm = () => {
     e.preventDefault();
     // console.log(name);
     if (name === '') return;
+    if (contacts.find(contact => contact.name === name)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
+
     dispatch(addContact({ name, number }));
     setName('');
     setNumber('');
@@ -74,4 +81,3 @@ const ContactForm = () => {
 // });
 
 export default ContactForm;
-
